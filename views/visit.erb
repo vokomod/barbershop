@@ -23,9 +23,10 @@
   <div class="form-group">
     <label for="exampleFormControlSelect1">Choose your barber</label>
     <select name="barber" class="form-control attributeClass" id="exampleFormControlSelect1">
-      <option>Walter White</option>
-      <option>Jessie Pinkman</option>
-      <option>Gus Fring</option>
+      <!-- proveraem 4to vvodilos' i vpisivaem eto v formu -->
+      <option <%= @barber == 'Walter White' ? 'selected' : '' %>>Walter White</option>
+      <option <%= @barber == 'Jessie Pinkman' ? 'selected' : '' %>>Jessie Pinkman</option>
+      <option <%= @barber == 'Gus Fring' ? 'selected' : '' %>>Gus Fring</option>
     </select>
   </div>
 
@@ -61,6 +62,5 @@
   $(function() {
     // tut pishetsa luboy js kod, kt ispolnitsa posle zagr vsey stranici
     $('select[name="colorpicker-shortlist"]').simplecolorpicker();
-    alert('ddd');
   });
 </script>
