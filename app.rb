@@ -3,15 +3,21 @@ require 'sinatra'
 require 'pony'
 require "sqlite3"
 
+def get_db
+	return SQLite3::Database.new 'barbershop.db'
+end
 
 configure do
-	@db = SQLite3::Database.new 'barbershop.db'
-	@db.execute 'CREATE TABLE IF NOT EXISTS "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE NOT NULL,
-    																								"name" TEXT,
-																										"phone" TEXT,
-																										"datestamp" TEXT,
-																										"barber" TEXT,
-																										"color" TEXT)'
+	get_db.execute 'CREATE TABLE IF NOT EXISTS
+		"users"
+			 (
+			 "id" INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE NOT NULL,
+    	 "name" TEXT,
+			 "phone" TEXT,
+			 "datestamp" TEXT,
+			 "barber" TEXT,
+			 "color" TEXT
+			 )'
 end
 
 get '/' do
@@ -49,9 +55,9 @@ post '/visit' do
 	@error = hash.select{|k,_| params[k] == ""}.values.join(", ")
 
 	if @error == ''
-		fileDataInput = File.open './public/users.txt', 'a'
-		fileDataInput.write "User: #{@userName}, phone: #{@userPhoneNumber}, date: #{@dateAndTime}, barber: #{@barber}, color: #{@color}\n"
-		fileDataInput.close
+
+		get_db.execute 'insert into users (name, phone, datestamp, barber, color)
+		 values (?, ?, ?, ?, ?)', [@userName, @userPhoneNumber, @dateAndTime, @barber, @color]
 
 		@message = "Hello #{@userName}, you are welcome!! Your phone number #{@userPhoneNumber} is correct? We are waitnig for you at #{@dateAndTime} You want to color your hair in #{@color}"
 		erb :message
