@@ -1,27 +1,47 @@
 <h1>
   Lets make an order!
 </h1>
+<!-- podklu4it script vnutri koda stranici -->
+<!--podklu4aem colorpicker-->
+<!--kod vnutri function vipolnyaetsa posle zagruzki stranici-->
+<!--jquery DOMready po4itat v gugle-->
+<!--tak delaetsa v slu4ae kogda javascript v body-->
+
+<script type="text/javascript">
+  $(function() {
+    // tut pishetsa luboy js kod, kt ispolnitsa posle zagr vsey stranici
+    $('select[name="colorpicker-shortlist"]').simplecolorpicker();
+    $('#datetimepicker4').datetimepicker();
+  });
+</script>
 
 <form action="/visit" method="POST">
   <div class="form-group">
     <label>Name please</label>
+    <div class="input-group">
     <input id="userNameBackground" name="userName" type="text" class="form-control" placeholder="Enter name here" data-toggle="tooltip" data-placement="top" title="Tooltip on top - name" value="<%=@userName%>">
     <small class="form-text text-muted">We'll never share your name with anyone else</small>
   </div>
+</div>
 
   <div class="form-group">
     <label>Your phone number please</label>
+    <div class="input-group">
     <input id="userPhoneBackground" name="userPhone" type="text" class="form-control" placeholder="Enter your phone number here" data-toggle="tooltip" data-placement="top" title="Tooltip on top - phone" value="<%=@userPhoneNumber%>">
     <small class="form-text text-muted">We'll never share your phone number with anyone else</small>
   </div>
+</div>
 
   <div class="form-group">
-    <label>Date please</label>
-    <input name="userDate" type="text" class="form-control attributeClass" placeholder="Enter date here" data-toggle="tooltip" data-placement="top" title="Tooltip on top - date" value="<%=@dateAndTime%>">
+      <label>Date please</label>
+    <div class="input-group">
+      <input name="userDate" id="datetimepicker4" type="text" class="form-control" placeholder="Enter date here" data-toggle="tooltip" data-placement="top" title="Tooltip on top - date" value="<%=@dateAndTime%>">
+    </div>
   </div>
 
   <div class="form-group">
     <label for="exampleFormControlSelect1">Choose your barber</label>
+    <div class="input-group">
     <select name="barber" class="form-control attributeClass" id="exampleFormControlSelect1">
       <!-- proveraem 4to vvodilos' i vpisivaem eto v formu -->
       <option <%= @barber == 'Walter White' ? 'selected' : '' %>>Walter White</option>
@@ -29,6 +49,7 @@
       <option <%= @barber == 'Gus Fring' ? 'selected' : '' %>>Gus Fring</option>
     </select>
   </div>
+</div>
 
   <div class="form-group">
     <label>Needed hair color</label>
@@ -51,16 +72,3 @@
   <button type="submit" class="btn btn-primary">Make an order</button>
 
 </form>
-
-<!-- podklu4it script vnutri koda stranici -->
-<!--podklu4aem colorpicker-->
-<!--kod vnutri function vipolnyaetsa posle zagruzki stranici-->
-<!--jquery DOMready po4itat v gugle-->
-<!--tak delaetsa v slu4ae kogda javascript v body-->
-<script type="text/javascript">
-
-  $(function() {
-    // tut pishetsa luboy js kod, kt ispolnitsa posle zagr vsey stranici
-    $('select[name="colorpicker-shortlist"]').simplecolorpicker();
-  });
-</script>
