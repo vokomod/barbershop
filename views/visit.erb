@@ -6,7 +6,12 @@
 <!--kod vnutri function vipolnyaetsa posle zagruzki stranici-->
 <!--jquery DOMready po4itat v gugle-->
 <!--tak delaetsa v slu4ae kogda javascript v body-->
+<p>
+  <%= $barber1 %> </br>
+  <%= $barber2 %></br>
+  <%= $barber3 %></br>
 
+</p>
 <script type="text/javascript">
   $(function() {
     // tut pishetsa luboy js kod, kt ispolnitsa posle zagr vsey stranici
@@ -44,9 +49,9 @@
     <div class="input-group">
     <select name="barber" class="form-control attributeClass" id="exampleFormControlSelect1">
       <!-- proveraem 4to vvodilos' i vpisivaem eto v formu -->
-      <option <%= @barber == 'Walter White' ? 'selected' : '' %>>Walter White</option>
-      <option <%= @barber == 'Jessie Pinkman' ? 'selected' : '' %>>Jessie Pinkman</option>
-      <option <%= @barber == 'Gus Fring' ? 'selected' : '' %>>Gus Fring</option>
+      <option <%= @barber == $barber1[0][0] ? 'selected' : '' %>><%= $barber1[0][0] %></option>
+      <option <%= @barber == $barber2[0][0] ? 'selected' : '' %>><%= $barber2[0][0] %></option>
+      <option <%= @barber == $barber3[0][0] ? 'selected' : '' %>><%= $barber3[0][0] %></option>
     </select>
   </div>
 </div>

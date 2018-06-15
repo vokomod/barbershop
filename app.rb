@@ -12,6 +12,7 @@ end
 #db = get_db
 
 configure do
+
 	get_db.execute 'CREATE TABLE IF NOT EXISTS
 		"users"
 			 (
@@ -22,6 +23,24 @@ configure do
 			 "barber" TEXT,
 			 "color" TEXT
 			 )'
+
+	get_db.execute 'CREATE TABLE IF NOT EXISTS
+  	"barbers"
+  		 (
+  		 "id" INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE NOT NULL,
+  		 "barber" TEXT UNIQUE
+  		 )'
+
+	get_db.execute 'insert or ignore into barbers (barber) values (?)',
+									['Walter White']
+	get_db.execute 'insert or ignore into barbers (barber) values (?)',
+									['Jessie Pinkman']
+	get_db.execute 'insert or ignore into barbers (barber) values (?)',
+									['Gus Fring']
+
+	$barber1 = get_db.execute 'select barber from barbers where id = 1'
+	$barber2 = get_db.execute 'select barber from barbers where id = 2'
+	$barber3 = get_db.execute 'select barber from barbers where id = 3'
 
 end
 
@@ -35,6 +54,9 @@ get '/about' do
 end
 
 get '/visit' do
+#	@barber1 = get_db.execute 'select barber from barbers where id = 1'
+#	@barber2 = get_db.execute 'select barber from barbers where id = 2'
+#	@barber3 = get_db.execute 'select barber from barbers where id = 3'
 	erb :visit
 end
 
@@ -53,6 +75,7 @@ post '/visit' do
 	@barber = params[:barber]
 	@color = params['colorpicker-shortlist']
 
+
 	hash = {:userName => 'Enter your name',
 					:userPhone => 'Enter your phone number',
 					:userDate => 'Enter valid date'}
@@ -60,10 +83,8 @@ post '/visit' do
 	@error = hash.select{|k,_| params[k] == ""}.values.join(", ")
 
 	if @error == ''
-
 		get_db.execute 'insert into users (name, phone, datestamp, barber, color)
 		 values (?, ?, ?, ?, ?)', [@userName, @userPhoneNumber, @dateAndTime, @barber, @color]
-
 		@message = "Hello #{@userName}, you are welcome!! Your phone number #{@userPhoneNumber} is correct? We are waitnig for you at #{@dateAndTime} You want to color your hair in #{@color}"
 		erb :message
 	else
@@ -116,7 +137,7 @@ post '/admin' do
 		@title = "Secret place"
 		@message = "Orders are <a href='/users.txt'>here</a> and feedback is <a href='/feedback.txt'>here</a>"
 
-		@message2 = get_db.execute 'select * from users'
+		@message2 = get_db.execute 'select * from users order by id desc'
 
 		erb :message2
   else
