@@ -9,8 +9,6 @@ def get_db
 	return db
 end
 
-#db = get_db
-
 configure do
 
 	get_db.execute 'CREATE TABLE IF NOT EXISTS
@@ -38,9 +36,9 @@ configure do
 	get_db.execute 'insert or ignore into barbers (barber) values (?)',
 									['Gus Fring']
 
-	$barber1 = get_db.execute 'select barber from barbers where id = 1'
-	$barber2 = get_db.execute 'select barber from barbers where id = 2'
-	$barber3 = get_db.execute 'select barber from barbers where id = 3'
+	$barber1 = (get_db.execute 'select barber from barbers where id = 1')[0][0]
+	$barber2 = (get_db.execute 'select barber from barbers where id = 2')[0][0]
+	$barber3 = (get_db.execute 'select barber from barbers where id = 3')[0][0]
 
 end
 
@@ -54,9 +52,6 @@ get '/about' do
 end
 
 get '/visit' do
-#	@barber1 = get_db.execute 'select barber from barbers where id = 1'
-#	@barber2 = get_db.execute 'select barber from barbers where id = 2'
-#	@barber3 = get_db.execute 'select barber from barbers where id = 3'
 	erb :visit
 end
 
