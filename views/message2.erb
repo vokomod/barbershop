@@ -1,0 +1,14 @@
+
+<h1>
+  <%=@title %>
+</h1>
+
+<p>
+  <%=@message %>
+</p>
+
+<p>
+  <% @message2.each do |k, v| %>
+  <%= p "#{k['id']} #{k['name']} zapisan k #{k['barber']} na #{k['datestamp']}" %> </br>
+  <% end %>
+</p>

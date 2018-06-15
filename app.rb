@@ -4,8 +4,12 @@ require 'pony'
 require "sqlite3"
 
 def get_db
-	return SQLite3::Database.new 'barbershop.db'
+	db = SQLite3::Database.new 'barbershop.db'
+	db.results_as_hash = true
+	return db
 end
+
+#db = get_db
 
 configure do
 	get_db.execute 'CREATE TABLE IF NOT EXISTS
@@ -18,6 +22,7 @@ configure do
 			 "barber" TEXT,
 			 "color" TEXT
 			 )'
+
 end
 
 get '/' do
@@ -37,8 +42,8 @@ get '/contacts' do
 	erb :contacts
 end
 
-get '/message' do
-	erb :message
+get '/message2' do
+	erb :message2
 end
 
 post '/visit' do
@@ -110,7 +115,10 @@ post '/admin' do
   if @adminPassword.strip == "zzz"
 		@title = "Secret place"
 		@message = "Orders are <a href='/users.txt'>here</a> and feedback is <a href='/feedback.txt'>here</a>"
-    erb :message
+
+		@message2 = get_db.execute 'select * from users'
+
+		erb :message2
   else
     @message = "<a href='http://www.fuck.off'>go to mommy!</a>"
     @title = "Ooooh, cool xakep!"
