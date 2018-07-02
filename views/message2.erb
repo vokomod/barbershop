@@ -12,3 +12,30 @@
   <%= p "#{k['id']} #{k['name']} zapisan k #{k['barber']} na #{k['datestamp']}" %> </br>
   <% end %>
 </p>
+
+<!-- kak na uroke sdelano  -->
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+     <th>N</th>
+     <th>Имя</th>
+     <th>Телефон</th>
+     <th>Парикмахер</th>
+     <th>Дата и время</th>
+     <th>Цвет</th>
+    </tr>
+  </thead>
+  <body>
+  <% @message2.each do |k, v| %>
+  <tr>
+    <td><%= k['id'] %></td>
+    <td><%= k['name'] %></td>
+    <td><%= k['phone'] %></td>
+    <td><%= k['barber'] %></td>
+    <td><%= k['datestamp'] %></td>
+    <td><%= k['color'] %></td>
+  </tr>
+  <% end %>
+</body>
+</table>

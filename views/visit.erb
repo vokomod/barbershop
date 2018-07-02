@@ -7,9 +7,8 @@
 <!--jquery DOMready po4itat v gugle-->
 <!--tak delaetsa v slu4ae kogda javascript v body-->
 <p>
-  <%= $barber1 %> </br>
-  <%= $barber2 %></br>
-  <%= $barber3 %></br>
+  <%= $barbersForForm %> </br>
+
 
 </p>
 <script type="text/javascript">
@@ -49,10 +48,17 @@
     <div class="input-group">
     <select name="barber" class="form-control attributeClass" id="exampleFormControlSelect1">
       <!-- proveraem 4to vvodilos' i vpisivaem eto v formu -->
-      <option <%= @barber == $barber1 ? 'selected' : '' %>><%= $barber1 %></option>
+      <!-- <option <%= @barber == $barber1 ? 'selected' : '' %>><%= $barber1 %></option>
       <option <%= @barber == $barber2 ? 'selected' : '' %>><%= $barber2 %></option>
-      <option <%= @barber == $barber3 ? 'selected' : '' %>><%= $barber3 %></option>
+      <option <%= @barber == $barber3 ? 'selected' : '' %>><%= $barber3 %></option> -->
+
+
+      <!-- kak sdelano na uroke -->
+      <% $barbersForForm.each do |item| %>
+        <option <%= @barber == item['barber'] ? 'selected' : '' %>><%= item['barber'] %></option>
+      <% end %>
     </select>
+
   </div>
 </div>
 
