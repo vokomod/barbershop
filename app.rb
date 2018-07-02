@@ -30,20 +30,9 @@ configure do
   		 "barber" TEXT UNIQUE
   		 )'
 
-	# get_db.execute 'insert or ignore into barbers (barber) values (?)',
-	# 								['Walter White']
-	# get_db.execute 'insert or ignore into barbers (barber) values (?)',
-	# 								['Jessie Pinkman']
-	# get_db.execute 'insert or ignore into barbers (barber) values (?)',
-	# 								['Gus Fring']
-
 	@barbersForWork.each do |barber|
 		get_db.execute 'insert or ignore into barbers (barber) values (?)', [barber]
 	end
-
-	# $barber1 = (get_db.execute 'select barber from barbers where id = 1')[0][0]
-	# $barber2 = (get_db.execute 'select barber from barbers where id = 2')[0][0]
-	# $barber3 = (get_db.execute 'select barber from barbers where id = 3')[0][0]
 
   $barbersForForm = get_db.execute 'select * from barbers'
 end

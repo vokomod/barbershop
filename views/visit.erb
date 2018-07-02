@@ -47,13 +47,9 @@
     <label for="exampleFormControlSelect1">Choose your barber</label>
     <div class="input-group">
     <select name="barber" class="form-control attributeClass" id="exampleFormControlSelect1">
-      <!-- proveraem 4to vvodilos' i vpisivaem eto v formu -->
-      <!-- <option <%= @barber == $barber1 ? 'selected' : '' %>><%= $barber1 %></option>
-      <option <%= @barber == $barber2 ? 'selected' : '' %>><%= $barber2 %></option>
-      <option <%= @barber == $barber3 ? 'selected' : '' %>><%= $barber3 %></option> -->
-
 
       <!-- kak sdelano na uroke -->
+      <!-- proveryaem 4to vvodilos i vibiraem ego selected -->
       <% $barbersForForm.each do |item| %>
         <option <%= @barber == item['barber'] ? 'selected' : '' %>><%= item['barber'] %></option>
       <% end %>
